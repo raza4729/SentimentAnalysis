@@ -1,7 +1,7 @@
 import re
 from nltk import PorterStemmer
-from nltk.corpus import stopwords
-from spellchecker import SpellChecker
+# from nltk.corpus import stopwords
+
 #nltk.download()
 
 
@@ -17,13 +17,13 @@ class Preprocessing(object):
         # Remove - & '
         word = re.sub(r"(-|')", '', word)
         # Checked-spellings
-        #spell = SpellChecker()
+        # spell = SpellChecker()
         # Get the one `most likely` answer
-        #spell.correction(word)
+        # spell.correction(word)
         # Removes Stopwords
-        #var = ''
-        #stop_words = stopwords.words('english')
-        #if word not in stop_words:
+        # var = ''
+        # stop_words = stopwords.words('english')
+        # if word not in stop_words:
         #    var = word
         return word
 
@@ -32,10 +32,11 @@ class Preprocessing(object):
         return re.search(r'^[a-zA-Z][a-z0-9A-Z\._]*$', word) is not None
 
     def handle_emojis(self, tweet):
+
         # Smile -- :), : ), :-), (:, ( :, (-:, :')
-        tweet = re.sub(r'(:\s?\)|:-\)|\(\s?:|\(-:|:\'\))', ' EMO_POS ', tweet)
+        tweet = re.sub(r"(:\s?\)|:-\)|\(\s?:|\(-:|:'\))", ' EMO_POS ', tweet)
         # Laugh -- :D, : D, :-D, xD, x-D, XD, X-D
-        tweet = re.sub(r'(:\s?D|:-D|x-?D|X-?D)', ' EMO_POS ', tweet)
+        tweet = re.sub(r"(:\s?D|:-D|x-?D|X-?D)", ' EMO_POS ', tweet)
         # Love -- <3, :*
         tweet = re.sub(r'(<3|:\*)', ' EMO_POS ', tweet)
         # Wink -- ;-), ;), ;-D, ;D, (;,  (-;
@@ -51,9 +52,9 @@ class Preprocessing(object):
         # Convert to lower case
         tweet = tweet.lower()
         # Replaces URLs with the word URL
-        tweet = re.sub(r'((www\.[\S]+)|(https?://[\S]+))', '', tweet)
+        tweet = re.sub(r'((www\.[\S]+)|(https?://[\S]+))', ' ', tweet)
         # Replace @handle with the word USER_MENTION
-        tweet = re.sub(r'@[\S]+', '', tweet)
+        tweet = re.sub(r'@[\S]+', ' ', tweet)
         # Replaces #hashtag with hashtag
         tweet = re.sub(r'#(\S+)', r' \1 ', tweet)
         # Remove RT (retweet)
@@ -71,11 +72,13 @@ class Preprocessing(object):
 
         for word in words:
             word = self.preprocess_word(word)
-            use_stemmer = False
-            porter_stemmer = PorterStemmer()
+            # print("BEFORE -> ", word)
+            use_stemmer = True
+            porter = PorterStemmer()
             if self.is_valid_word(word):
                 if use_stemmer:
-                    word = str(porter_stemmer.stem(word))
+                    word = str(porter.stem(word))
+                    # print("AFTER -> ", word)
                 processed_tweet.append(word)
 
         return ' '.join(processed_tweet)
