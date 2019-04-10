@@ -51,6 +51,7 @@ with open(parent_dir_of_file + '\ProcessedTweets/preprocessedTweets.txt', 'r') a
         # print(tokenized_words)
         # spell = SpellChecker()
         var = [word for word in tokenized_words.split() if word not in stop_words]
+        # print(var)
         # for word in var:
         # Get the one `most likely` answer
         # print(count, "      ", spell.correction(word))
@@ -64,12 +65,14 @@ with open(parent_dir_of_file + '\ProcessedTweets/preprocessedTweets.txt', 'r') a
         # print(str(neg_removed))
         tweets.append(neg_removed)
 
+Line = ''
 for i in tweets:
     line = ' '.join(i)
     cleaned_tweets.write(line)
     cleaned_tweets.write('\n')
     # print(line)
 cleaned_tweets.close()
+
 # for line in cleaned_tweets:
 #     print(line.split())
 #     line = ' '.join(neg_removed)

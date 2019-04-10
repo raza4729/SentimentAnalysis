@@ -1,5 +1,6 @@
 import re
 from nltk import PorterStemmer
+from nltk.stem import SnowballStemmer
 # from nltk.corpus import stopwords
 
 #nltk.download()
@@ -70,15 +71,17 @@ class Preprocessing(object):
         tweet = re.sub(r'text', ' ', tweet)
         words = tweet.split()
 
+        snowball = SnowballStemmer('english')
         for word in words:
             word = self.preprocess_word(word)
-            # print("BEFORE -> ", word)
+            #print("BEFORE -> ", word)
             use_stemmer = True
             porter = PorterStemmer()
             if self.is_valid_word(word):
                 if use_stemmer:
-                    word = str(porter.stem(word))
-                    # print("AFTER -> ", word)
+                    # word = str(porter.stem(word))
+                    word = snowball.stem(word)
+                    #print("AFTER -> ", word)
                 processed_tweet.append(word)
 
         return ' '.join(processed_tweet)

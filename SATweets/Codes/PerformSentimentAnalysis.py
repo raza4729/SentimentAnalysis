@@ -9,7 +9,7 @@ matplotlib.use('TkAgg')
 class PerformSentimentAnalysis(object):
 
     @staticmethod
-    def pie_chart(pos, neg, neu):
+    def pie_chart(pos, neg, neu, title):
 
         # Drawing Pie chart
         slices_hours = [pos, neg, neu]
@@ -20,7 +20,7 @@ class PerformSentimentAnalysis(object):
         plt.pie(slices_hours, explode=explode, labels=activities, colors=colors, startangle=90, autopct='%.1f%%', shadow=True)
         # Equal aspect ratio ensures that pie is drawn as a circle
         plt.axis('equal')
-        plt.title('VaderSentiment')
+        plt.title(title)
         plt.tight_layout()
 
         plt.show()
@@ -58,7 +58,7 @@ class PerformSentimentAnalysis(object):
             neg = (neg/total)*100
             neu = (neu/total)*100
             # calling pie chart drawing method
-            self.pie_chart(pos, neg, neu)
+            self.pie_chart(pos, neg, neu, 'VaderSentiment')
         else:
             print('Empty values were given.')
 
@@ -97,6 +97,6 @@ class PerformSentimentAnalysis(object):
             neg = (neg/total)*100
             neu = (neu/total)*100
             # calling pie chart drawing method
-            self.pie_chart(pos, neg, neu)
+            self.pie_chart(pos, neg, neu, 'TextBlob')
         else:
             print('Empty values were given.')
