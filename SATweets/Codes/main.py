@@ -1,4 +1,7 @@
 from nltk.corpus import stopwords
+from nltk import PorterStemmer
+from nltk.tokenize import word_tokenize
+
 from Codes.PerformSentimentAnalysis import PerformSentimentAnalysis
 from Codes.replacer import AntonymReplacer
 # from spellchecker import SpellChecker
@@ -16,7 +19,7 @@ obj.read()
 
 # Preprocessing.py
 obj = Preprocessing()
-cleaned_tweets = open(parent_dir_of_file + '\ProcessedTweets/temp.txt', 'w')
+cleaned_tweets = open(parent_dir_of_file + '\ProcessedTweets/temp.txt', 'w', encoding="utf-8")
 # with open('C:/Users/Dell/PycharmProjects/SATweets/ProcessedTweets/rawTweets.txt', 'r', encoding="utf-8") as f:
 with open(parent_dir_of_file + '\ProcessedTweets/rawTweets.txt', 'r', encoding="utf-8") as f:
     for line in f:
@@ -73,16 +76,17 @@ for i in tweets:
     # print(line)
 cleaned_tweets.close()
 
-# for line in cleaned_tweets:
-#     print(line.split())
-#     line = ' '.join(neg_removed)
-#     cleaned_tweets.write(line)
-#     cleaned_tweets.write('\n')
-#     cleaned_tweets.close()
+# Stemming and sorting
+file = sorted(open(parent_dir_of_file + '\ProcessedTweets/final_ready-tweets-csv.txt').read().split())
+# print(file)
+stemmer = PorterStemmer()
+for word in file:
+    # print(word)
+    print(stemmer.stem(word))
 
 # PerformSentimentAnalysis.py
-with open(parent_dir_of_file + '\ProcessedTweets/final_ready-tweets-csv.txt', 'r') as f:
-    SA.vader(f)
+#with open(parent_dir_of_file + '\ProcessedTweets/final_ready-tweets-csv.txt', 'r') as f:
+#    SA.vader(f)
 
-with open(parent_dir_of_file + '\ProcessedTweets/final_ready-tweets-csv.txt', 'r') as f:
-    SA.textblob(f)
+#with open(parent_dir_of_file + '\ProcessedTweets/final_ready-tweets-csv.txt', 'r') as f:
+#    SA.textblob(f)
