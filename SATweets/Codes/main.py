@@ -69,20 +69,44 @@ with open(parent_dir_of_file + '\ProcessedTweets/preprocessedTweets.txt', 'r') a
         tweets.append(neg_removed)
 
 Line = ''
+democrat = 0
+republican = 0
+repub_tweets = open(parent_dir_of_file + '\ProcessedTweets/republicans-tweets.txt', 'w', encoding="utf-8")
+democrat_tweets = open(parent_dir_of_file + '\ProcessedTweets/democrat-tweets.txt', 'w', encoding="utf-8")
 for i in tweets:
     line = ' '.join(i)
+    if 'republican' in line or 'trump' in line or 'donald' in line:
+        republican = republican + 1
+        # print(republican, "  REPUBLICAN       ", line)
+        repub_tweets.write(line)
+        repub_tweets.write('\n')
+    elif 'democrat' in line or 'clinton' in line or 'hillary' in line:
+        democrat = democrat + 1
+        # print(democrat, "  DEMOCRAT       ", line)
+        democrat_tweets.write(line)
+        democrat_tweets.write('\n')
     cleaned_tweets.write(line)
     cleaned_tweets.write('\n')
     # print(line)
 cleaned_tweets.close()
 
 # Stemming and sorting
+vocabulary = open(parent_dir_of_file + '\ProcessedTweets/vocab.txt', 'w', encoding="utf-8")
 file = sorted(open(parent_dir_of_file + '\ProcessedTweets/final_ready-tweets-csv.txt').read().split())
-# print(file)
+print(file)
 stemmer = PorterStemmer()
 for word in file:
-    # print(word)
-    print(stemmer.stem(word))
+    vocab =stemmer.stem(word)
+    vocabulary.write(vocab)
+    vocabulary.write('\n')
+vocabulary.close()
+
+contents = open(parent_dir_of_file + '\ProcessedTweets/vocab.txt', 'r').readlines()
+content_set = set(contents)
+cleanData = open(parent_dir_of_file + '\ProcessedTweets/preprocessed-Vocab.txt', 'w')
+
+for line in content_set:
+    cleanData.write(line)
 
 # PerformSentimentAnalysis.py
 #with open(parent_dir_of_file + '\ProcessedTweets/final_ready-tweets-csv.txt', 'r') as f:
