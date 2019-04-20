@@ -1,6 +1,7 @@
 from nltk.corpus import stopwords
 from nltk import PorterStemmer
 from nltk.tokenize import word_tokenize
+import csv
 
 from Codes.PerformSentimentAnalysis import PerformSentimentAnalysis
 from Codes.replacer import AntonymReplacer
@@ -17,8 +18,9 @@ parent_dir_of_file = dirname(dir_of_file)
 obj = ReadCSV()
 obj.read()
 
-# Preprocessing.py
+# PreProcessing.py
 obj = Preprocessing()
+
 cleaned_tweets = open(parent_dir_of_file + '\ProcessedTweets/temp.txt', 'w', encoding="utf-8")
 # with open('C:/Users/Dell/PycharmProjects/SATweets/ProcessedTweets/rawTweets.txt', 'r', encoding="utf-8") as f:
 with open(parent_dir_of_file + '\ProcessedTweets/rawTweets.txt', 'r', encoding="utf-8") as f:
@@ -27,7 +29,6 @@ with open(parent_dir_of_file + '\ProcessedTweets/rawTweets.txt', 'r', encoding="
         # print(clnd_tweets)
         cleaned_tweets.write(clnd_tweets)
         cleaned_tweets.write('\n')
-
 cleaned_tweets.close()
 f.close()
 
@@ -51,7 +52,6 @@ with open(parent_dir_of_file + '\ProcessedTweets/preprocessedTweets.txt', 'r') a
     for tokenized_words in f:
         count = count + 1
         stop_words = stopwords.words('english')
-        # print(tokenized_words)
         # spell = SpellChecker()
         var = [word for word in tokenized_words.split() if word not in stop_words]
         # print(var)
@@ -65,7 +65,6 @@ with open(parent_dir_of_file + '\ProcessedTweets/preprocessedTweets.txt', 'r') a
         # print(spell.candidates(word))
 
         neg_removed = replacer.repalce_negations(var)
-        # print(str(neg_removed))
         tweets.append(neg_removed)
 
 Line = ''
@@ -90,10 +89,10 @@ for i in tweets:
     # print(line)
 cleaned_tweets.close()
 
-# Stemming and sorting
+# Stemming and Sorting
 vocabulary = open(parent_dir_of_file + '\ProcessedTweets/vocab.txt', 'w', encoding="utf-8")
 file = sorted(open(parent_dir_of_file + '\ProcessedTweets/final_ready-tweets-csv.txt').read().split())
-print(file)
+# print(file)
 stemmer = PorterStemmer()
 for word in file:
     vocab =stemmer.stem(word)
@@ -109,8 +108,8 @@ for line in content_set:
     cleanData.write(line)
 
 # PerformSentimentAnalysis.py
-#with open(parent_dir_of_file + '\ProcessedTweets/final_ready-tweets-csv.txt', 'r') as f:
-#    SA.vader(f)
+with open(parent_dir_of_file + '\ProcessedTweets/final_ready-tweets-csv.txt', 'r') as f:
+    SA.vader(f)
 
-#with open(parent_dir_of_file + '\ProcessedTweets/final_ready-tweets-csv.txt', 'r') as f:
-#    SA.textblob(f)
+with open(parent_dir_of_file + '\ProcessedTweets/final_ready-tweets-csv.txt', 'r') as f:
+    SA.textblob(f)

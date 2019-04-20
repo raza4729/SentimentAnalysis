@@ -73,23 +73,16 @@ class PerformSentimentAnalysis(object):
         for sentence in tweet:
             analysis = TextBlob(sentence)
             total = total + 1
-            # Checked-spellings
-            # spell = SpellChecker()
-            # Get the one `most likely` answer
-            # print("SpellChecker->   ", spell.correction(str(analysis)))
-            # print("SpellChecker->   ", analysis.correct())
+
             if analysis.sentiment.polarity > 0:
-                # print("Positive tweet -> ", analysis)
                 pos = pos + 1
                 # return 1
             elif analysis.sentiment.polarity == 0:
-                # print("Neutral tweet -> ", analysis)
                 neu = neu + 1
                 # return 0
             else:
                 # text = analysis
                 neg = neg + 1
-                # print("Negative tweet -> ", text)
                 # return -1
 
         if pos is not None and neg is not None and neu is not None:

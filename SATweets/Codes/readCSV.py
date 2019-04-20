@@ -1,4 +1,10 @@
 import csv
+from os.path import dirname, realpath
+
+
+filepath = realpath(__file__)
+dir_of_file = dirname(filepath)
+parent_dir_of_file = dirname(dir_of_file)
 
 
 class ReadCSV(object):
@@ -11,10 +17,10 @@ class ReadCSV(object):
     def read(self):
 
         # Reading needed data from given json file
-        file = open("C:/Users/Dell/PycharmProjects/SATweets/ProcessedTweets/rawTweets-Location-Date.txt", 'w', encoding="utf-8")
-        file_tweets = open("C:/Users/Dell/PycharmProjects/SATweets/ProcessedTweets/rawTweets.txt", 'w', encoding="utf-8")
+        file = open(parent_dir_of_file + "/ProcessedTweets/rawTweets-Location-Date.txt", 'w', encoding="utf-8")
+        file_tweets = open(parent_dir_of_file + "/ProcessedTweets/rawTweets.txt", 'w', encoding="utf-8")
         try:
-            with open('C:/Users/Dell/PycharmProjects/SATweets/TweetsFiles/tweets.csv', 'r', encoding="utf8") as f:
+            with open(parent_dir_of_file + '/TweetsFiles/tweets.csv', 'r', encoding="utf8") as f:
                 data = csv.reader(f)
                 for row in data:
                     if 'California' in row[17]:
@@ -42,7 +48,6 @@ class ReadCSV(object):
 
                 file.write('\n')
                 file_tweets.write('\n')
-
         file.close()
 
 

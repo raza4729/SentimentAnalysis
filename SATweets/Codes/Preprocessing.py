@@ -86,23 +86,5 @@ class Preprocessing(object):
         return ' '.join(processed_tweet)
 
 
-# obj = Preprocessing()
-# cleaned_tweets = open('C:/Users/Dell/PycharmProjects/SATweets/ProcessedTweets/temp.txt', 'w')
-# with open('C:/Users/Dell/PycharmProjects/SATweets/ProcessedTweets/rawTweets.txt', 'r', encoding="utf-8") as f:
-#     for line in f:
-#         clnd_tweets = obj.preprocess_tweet(line)
-#         print(clnd_tweets)
-#         cleaned_tweets.write(clnd_tweets)
-#         cleaned_tweets.write('\n')
-#
-# cleaned_tweets.close()
-# f.close()
-#
-# contents = open('C:/Users/Dell/PycharmProjects/SATweets/ProcessedTweets/temp.txt', 'r').readlines()
-# content_set = set(contents)
-# cleanData = open('C:/Users/Dell/PycharmProjects/SATweets/ProcessedTweets/preprocessedTweets.txt', 'w')
-#
-# for line in content_set:
-#     cleanData.write(line)
-# cleanData.close()
+
 
