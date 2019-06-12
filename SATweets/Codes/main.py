@@ -34,7 +34,7 @@ f.close()
 
 contents = open(parent_dir_of_file + '\ProcessedTweets/temp.txt', 'r').readlines()
 content_set = set(contents)
-cleanData = open(parent_dir_of_file + '\ProcessedTweets/preprocessedTweets.txt', 'w')
+cleanData = open(parent_dir_of_file + '/ProcessedTweets/preprocessedTweets.txt', 'w')
 
 for line in content_set:
     cleanData.write(line)
@@ -70,8 +70,8 @@ with open(parent_dir_of_file + '\ProcessedTweets/preprocessedTweets.txt', 'r') a
 Line = ''
 democrat = 0
 republican = 0
-repub_tweets = open(parent_dir_of_file + '\ProcessedTweets/republicans-tweets.txt', 'w', encoding="utf-8")
-democrat_tweets = open(parent_dir_of_file + '\ProcessedTweets/democrat-tweets.txt', 'w', encoding="utf-8")
+repub_tweets = open(parent_dir_of_file + '/ProcessedTweets/republicans-tweets.txt', 'w', encoding="utf-8")
+democrat_tweets = open(parent_dir_of_file + '/ProcessedTweets/democrat-tweets.txt', 'w', encoding="utf-8")
 for i in tweets:
     line = ' '.join(i)
     if 'republican' in line or 'trump' in line or 'donald' in line:
@@ -90,8 +90,8 @@ for i in tweets:
 cleaned_tweets.close()
 
 # Stemming and Sorting
-vocabulary = open(parent_dir_of_file + '\ProcessedTweets/vocab.txt', 'w', encoding="utf-8")
-file = sorted(open(parent_dir_of_file + '\ProcessedTweets/final_ready-tweets-csv.txt').read().split())
+vocabulary = open(parent_dir_of_file + '/ProcessedTweets/vocab.txt', 'w', encoding="utf-8")
+file = sorted(open(parent_dir_of_file + '/ProcessedTweets/final_ready-tweets-csv.txt').read().split())
 # print(file)
 stemmer = PorterStemmer()
 for word in file:
@@ -100,16 +100,16 @@ for word in file:
     vocabulary.write('\n')
 vocabulary.close()
 
-contents = open(parent_dir_of_file + '\ProcessedTweets/vocab.txt', 'r').readlines()
+contents = open(parent_dir_of_file + '/ProcessedTweets/vocab.txt', 'r').readlines()
 content_set = set(contents)
-cleanData = open(parent_dir_of_file + '\ProcessedTweets/preprocessed-Vocab.txt', 'w')
+cleanData = open(parent_dir_of_file + '/ProcessedTweets/preprocessed-Vocab.txt', 'w')
 
 for line in content_set:
     cleanData.write(line)
 
 # PerformSentimentAnalysis.py
-with open(parent_dir_of_file + '\ProcessedTweets/final_ready-tweets-csv.txt', 'r') as f:
+with open(parent_dir_of_file + '/ProcessedTweets/final_ready-tweets-csv.txt', 'r') as f:
     SA.vader(f)
 
-with open(parent_dir_of_file + '\ProcessedTweets/final_ready-tweets-csv.txt', 'r') as f:
+with open(parent_dir_of_file + '/ProcessedTweets/final_ready-tweets-csv.txt', 'r') as f:
     SA.textblob(f)

@@ -93,3 +93,7 @@ class PerformSentimentAnalysis(object):
             self.pie_chart(pos, neg, neu, 'TextBlob')
         else:
             print('Empty values were given.')
+
+    def naiveBayes(self):
+
+        return 0
